@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+int binarySearch(int temperatures[], int n, int targetTemp) {
+    int left = 0, right = n - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (temperatures[mid] == targetTemp)
+            return mid;
+        if (temperatures[mid] < targetTemp)
+            left = mid + 1;
+        else
+            right = mid - 1;
+    }
+    return -1;
+}
+
+int main() {
+    int temperatures[] = {65, 68, 70, 73, 75, 78, 80, 82, 85, 88, 90, 92, 95};
+    int n = sizeof(temperatures) / sizeof(temperatures[0]);
+    int targetTemp;
+    
+    printf("Enter the temperature to search for: ");
+    scanf("%d", &targetTemp);
+
+    int result = binarySearch(temperatures, n, targetTemp);
+
+    if (result != -1) {
+        printf("Temperature %d°F was recorded on day %d of the month.\n", targetTemp, result + 1);
+    } else {
+        printf("Temperature %d°F was not recorded this month.\n", targetTemp);
+    }
+
+    return 0;
+}
